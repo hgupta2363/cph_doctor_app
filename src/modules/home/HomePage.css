@@ -1,0 +1,16 @@
+.app_bar_wrapper {
+  display: flex;
+
+  align-items: flex-start;
+  padding: 0px 10px 10px 0px;
+}
+.app_drawer_wrapper {
+  padding-top: 12px;
+}
+.images_wrapper {
+  width: 100%;
+  margin: auto;
+}
+.card:hover {
+  background-color: #7ba4f5;
+}

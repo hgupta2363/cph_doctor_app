@@ -1,0 +1,87 @@
+.appointment_card_wrapper{
+   margin-top: 20px;
+
+   border-radius: 20px;
+   box-shadow: 0 0 50px #ccc;
+   background-color: white;
+
+}
+.scheduled_heder_text{
+    font-size: 18px;
+    font-weight: 600;
+
+
+}
+.appointment_header{
+    padding:15px 15px 15px 15px;
+    background-color: #246bfd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+.header_text{
+    color:white;
+    font-size: 20px;
+    font-weight: 500;
+    margin:0
+}
+.time_text{
+    color:white;
+    font-size: 14px;
+    font-weight: 400;
+}
+.appointment_info_row{
+    padding:10px 10px 10px 20px;
+    display: flex;
+    gap:60px;
+    align-items: flex-start;
+    border-bottom: 1px solid rgb(234, 231, 231);
+
+    padding-bottom: 20px;
+ 
+
+}
+.doctor_text{
+    font-size: 18px;
+    font-weight: 600;
+
+}
+.spec_text{
+    font-size: 14px;
+    font-weight: 400;
+
+}
+.slot_text{
+    font-size: 14px;
+    font-weight: 400;
+
+}
+.cancel_button_ {
+    color: #246bfd;
+    font-size: 16px;
+    font-weight: 600;
+    width: 150px;
+    height: 45px;
+    border: 0px;
+    background: white;
+    border: 1px solid #246bfd;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .view_details{
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    width: 300px;
+    height: 45px;
+    border: 0px;
+    background: #246bfd;
+    border: 1px solid #246bfd;
+    border-radius: 30px;
+    cursor: pointer;
+  margin-top: 15px;
+  }

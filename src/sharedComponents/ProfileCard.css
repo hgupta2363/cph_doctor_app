@@ -1,0 +1,65 @@
+.doctor_card_wrapper {
+
+    padding: 5px 10px 10px 20px;
+    border-radius: 5px;
+   
+    background-color: #ffffff;
+  }
+  .doctor_info_row {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+   
+  
+    padding-bottom: 10px;
+  }
+  .doctor_text_1 {
+font-size: 18px;
+    font-weight: 600;
+  }
+  .spec_text_1 {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .slot_text_1 {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .book_button {
+    color: #246bfd;
+    font-size: 14px;
+    font-weight: 400;
+    width: 150px;
+    height: 35px;
+    border: 0px;
+    background: white;
+    border: 1px solid #246bfd;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .book_button:hover {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    width: 170px;
+    height: 40px;
+    border: 0px;
+    background: #246bfd;
+  
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  .profile1_button{
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    width: 150px;
+    height: 35px;
+    border: 0px;
+    background: #246bfd;
+    border: 1px solid #246bfd;
+    border-radius: 30px;
+    cursor: pointer;
+  margin-top: 10px;  
+  }

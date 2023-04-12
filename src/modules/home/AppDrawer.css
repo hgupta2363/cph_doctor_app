@@ -1,0 +1,33 @@
+.item_text_style {
+  font-size: 20px;
+  font-weight: 400;
+}
+.user_avatar_wrapper {
+  background-color: #246bfd;
+  height: 80px;
+}
+.login_signup_button {
+  color: #246bfd;
+  font-size: 22px;
+  font-weight: 500;
+  width: 180px;
+  height: 40px;
+  border-color: #246bfd;
+  background-color: white;
+
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+.user_info_wrapper {
+  padding: 15px 10px 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 140px;
+}
+.user_info_text {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
