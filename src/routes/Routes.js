@@ -4,7 +4,7 @@ import PhoneNumberScreen from '../modules/auth/PhoneNumberScreen';
 import OtpScreen from '../modules/auth/OtpScreen';
 import PrivateRoutes from './PrivateRoutes';
 import AppointmentListContainer from '../modules/appointments/AppointMentList';
-import VideoCallComponent from '../modules/videoCalling/VideoCallComponent';
+import VideoCallComponent from '../modules/videoSdk/VideoCall';
 const Routes = () => {
   return (
     <Router>

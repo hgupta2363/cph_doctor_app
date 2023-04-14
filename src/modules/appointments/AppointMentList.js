@@ -14,6 +14,7 @@ import {
 import { onSnapshot } from 'firebase/firestore';
 import { AuthContex } from '../../contextProvider/authContextProvider';
 import Loading from '../../sharedComponents/Loading';
+import { createMeeting } from '../../data/api';
 
 const AppointmentStatuses = [
   {
@@ -95,7 +96,8 @@ const AppointmentListContainer = () => {
   const onAccept = async (appointmentId) => {
     try {
       setLoading(true);
-      await markAccepted(appointmentId);
+      const meetingId = await createMeeting();
+      await markAccepted(appointmentId, meetingId);
       setLoading(false);
       setSlectedIndex(1);
     } catch (err) {}

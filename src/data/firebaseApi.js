@@ -103,9 +103,10 @@ export const fetchAppointmentsByDocUserId = async (
     console.log(error);
   }
 };
-export const markAccepted = async (id) => {
+export const markAccepted = async (id, meetingId) => {
   await updateDoc(doc(db, 'cphAppointments', id), {
     status: 'ACCEPTED',
+    meetingId: meetingId,
   });
 };
 export const checkIsDoctorAvailable = async (mobileNo) => {

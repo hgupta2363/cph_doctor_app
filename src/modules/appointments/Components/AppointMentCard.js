@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AppointmentsCard.css';
 import Avatar from '@mui/material/Avatar';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import { useHistory } from 'react-router-dom';
-import VideoCallComponent from '../../videoCalling/VideoCallComponent';
+
 import DuoIcon from '@mui/icons-material/Duo';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 const AppointMentCard = ({ appointment, onAccept }) => {
+  const [isExpended, setIsexpended] = useState(false);
   const history = useHistory();
   console.log(
     new Date(
@@ -24,13 +26,17 @@ const AppointMentCard = ({ appointment, onAccept }) => {
   };
   return (
     <div className='appointment_card_wrapper'>
-      <div className='appointment_header'>
+      <div
+        className='appointment_header'
+        onClick={() => setIsexpended((prev) => !prev)}
+      >
         <p className='header_text'>
           {' '}
           {appointment?.status === 'REQUESTED'
             ? 'Appointment Request'
             : 'Appointment'}
         </p>
+        <p className='name_text'>{`Patient Name: ${appointment?.patient_info?.name}`}</p>
         <div
           style={{
             display: 'flex',
@@ -50,30 +56,14 @@ const AppointMentCard = ({ appointment, onAccept }) => {
         </div>
       </div>
 
-      <div className='appointment_info_row'>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-
-              padding: '5px 5px 20px 20px',
-              borderRadius: '5px',
-            }}
-          >
-            <p className='scheduled_heder_text'>Patient Information</p>
+      {isExpended ? (
+        <>
+          <div className='appointment_info_row'>
             <div
               style={{
                 display: 'flex',
-                flexDirection: 'row',
-                gap: '40px',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
               }}
             >
               <div
@@ -81,77 +71,117 @@ const AppointMentCard = ({ appointment, onAccept }) => {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'flex-start',
-                  paddingLeft: '10px',
+
+                  padding: '5px 5px 20px 20px',
+                  borderRadius: '5px',
                 }}
               >
-                <p className='scheduled_date_text'>Name</p>
-                <p className='scheduled_date_text'>Age</p>
-                <p className='scheduled_date_text'>Gender</p>
-                <p className='scheduled_date_text'>Mobile Number</p>
-                <p className='scheduled_date_text'>Health Issue</p>
+                <p className='scheduled_heder_text'>Patient Information</p>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '40px',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      paddingLeft: '10px',
+                    }}
+                  >
+                    <p className='scheduled_date_text'>Name</p>
+                    <p className='scheduled_date_text'>Age</p>
+                    <p className='scheduled_date_text'>Gender</p>
+                    <p className='scheduled_date_text'>Mobile Number</p>
+                    <p className='scheduled_date_text'>Health Issue</p>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                    }}
+                  >
+                    <p className='scheduled_date_text'>{`   ${appointment?.patient_info?.name}`}</p>
+                    <p className='scheduled_date_text'>{`   ${appointment?.patient_info?.age}`}</p>
+                    <p className='scheduled_date_text'>{`    ${appointment?.patient_info?.gender}`}</p>
+                    <p className='scheduled_date_text'>{`    ${appointment?.patient_info?.phoneNo}`}</p>
+                    <p className='scheduled_date_text'>{`   ${appointment?.patient_info?.healthIssueText}`}</p>
+                  </div>
+                </div>
               </div>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                }}
-              >
-                <p className='scheduled_date_text'>{`   ${appointment?.patient_info?.name}`}</p>
-                <p className='scheduled_date_text'>{`   ${appointment?.patient_info?.age}`}</p>
-                <p className='scheduled_date_text'>{`    ${appointment?.patient_info?.gender}`}</p>
-                <p className='scheduled_date_text'>{`    ${appointment?.patient_info?.phoneNo}`}</p>
-                <p className='scheduled_date_text'>{`   ${appointment?.patient_info?.healthIssueText}`}</p>
-              </div>
+              <>
+                {appointment?.status === 'ACCEPTED' && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      width: '100%',
+                      margin: 'auto',
+                      gap: '80px',
+                      marginTop: '30px',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <div>
+                      <DuoIcon
+                        style={{
+                          color: '#246bfd',
+                          height: '50px',
+                          width: '50px',
+                        }}
+                        onClick={() =>
+                          history.push('/videoCall', {
+                            meetingId: appointment?.meetingId,
+                          })
+                        }
+                      />
+                      <p>Video Call</p>
+                    </div>
+                    <div>
+                      <LocalPhoneIcon
+                        style={{
+                          color: '#246bfd',
+                          height: '50px',
+                          width: '50px',
+                        }}
+                        onClick={() => {
+                          window.location = 'tel:8118853410';
+                        }}
+                      />
+                      <p>Phone Call</p>
+                    </div>
+                  </div>
+                )}
+              </>
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            {appointment?.status === 'ACCEPTED' && (
-              <DuoIcon
-                style={{ color: '#246bfd', height: '30px', width: '30px' }}
-                onClick={() => history.push('/videoCall')}
-              />
-            )}
-          </div>
-        </div>
-      </div>
 
-      {appointment?.status === 'REQUESTED' && (
-        <div
-          style={{
-            display: 'flex',
-            gap: '10px',
-            padding: '10px 20px 10px 20px',
-          }}
-        >
-          <div style={{ paddingBottom: '5px', margin: '0px' }}>
-            <button className='cancel_button_'>Reject</button>
-          </div>
+          {appointment?.status === 'REQUESTED' && (
+            <div
+              style={{
+                display: 'flex',
+                gap: '70px',
+                padding: '10px 20px 10px 20px',
+              }}
+            >
+              <div style={{ paddingBottom: '5px', margin: '0px' }}>
+                <button className='cancel_button_'>Reject</button>
+              </div>
 
-          <button
-            className='view_details'
-            onClick={() => onAccept(appointment?.appointment_id)}
-          >
-            Accept
-          </button>
-        </div>
-      )}
-      {appointment?.status === 'ACCEPTED' && (
-        <div
-          style={{
-            display: 'flex',
-            gap: '10px',
-            padding: '10px 20px 10px 20px',
-          }}
-        >
-          <button
-            className='view_details'
-            onClick={() => onAccept(appointment?.appointment_id)}
-          >
-            view details
-          </button>
-        </div>
-      )}
+              <button
+                className='view_details'
+                onClick={() => onAccept(appointment?.appointment_id)}
+              >
+                Accept
+              </button>
+            </div>
+          )}
+        </>
+      ) : null}
     </div>
   );
 };
