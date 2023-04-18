@@ -1,0 +1,77 @@
+.overlay {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(220, 220, 220);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fade 1s ease forwards;
+    z-index: 1002;
+  }
+  .close_icon{
+    position: relative;
+    bottom:20px;
+    left:110px
+
+  }
+  .popup_card {
+    width: clamp(250px, 50%, 500px);
+    background-color:white;
+  
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    opacity: 1;
+    z-index: 1002;
+    border-radius: 10px;
+    box-shadow: 3px 2px 2px white;
+    padding-bottom: 20px;
+    padding-top: 20px;
+
+  }
+  .upload_button_ {
+    color: #246bfd;
+    font-size: 16px;
+    font-weight: 600;
+    width: 150px;
+    height: 35px;
+    border: 0px;
+    background: white;
+    border: 1px solid #246bfd;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  .success_uploaded{
+    width:120px;
+    height:40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
+    border: solid 1px rgb(106, 191, 106);
+  }
+  .success_uploaded_text{
+    color:rgb(106, 191, 106);
+    font-size: 20px;
+    font-weight: 400;
+  }
+  .mark_appointment_done{
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    width: 220px;
+    height: 45px;
+    border: 0px;
+    background: #246bfd;
+    border: 1px solid #246bfd;
+    border-radius: 30px;
+    cursor: pointer;
+  margin-top: 15px;
+  }

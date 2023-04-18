@@ -1,7 +1,12 @@
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
-import { initializeApp } from 'firebase/app'
-import { getAnalytics } from 'firebase/analytics'
-import { getFirestore } from 'firebase/firestore'
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,10 +20,11 @@ const firebaseConfig = {
   messagingSenderId: '996974317374',
   appId: '1:996974317374:web:859668bcfaa7163036a66f',
   measurementId: 'G-1SY9V065K8',
-}
+};
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig)
-export const auth = getAuth()
-export const captchaVerifier = RecaptchaVerifier
-export const signIn = signInWithPhoneNumber
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
+export const captchaVerifier = RecaptchaVerifier;
+export const signIn = signInWithPhoneNumber;
+export const storage = getStorage(app);

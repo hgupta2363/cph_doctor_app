@@ -109,6 +109,13 @@ export const markAccepted = async (id, meetingId) => {
     meetingId: meetingId,
   });
 };
+export const markDone = async (id, prescribtionUrl) => {
+  console.log(id, prescribtionUrl);
+  await updateDoc(doc(db, 'cphAppointments', id), {
+    status: 'COMPLETED',
+    prescribtionUrl: prescribtionUrl,
+  });
+};
 export const checkIsDoctorAvailable = async (mobileNo) => {
   console.log(mobileNo);
   try {
