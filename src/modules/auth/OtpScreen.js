@@ -8,7 +8,6 @@ import { auth, captchaVerifier, signIn } from '../../data/firebaseInit';
 import { setPersistence, inMemoryPersistence } from 'firebase/auth';
 import otpImage from '../../assets/otp.PNG';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { markDoctorVerified } from '../../data/firebaseApi';
 import {
   showErrorMsg,
   msgPosition,
@@ -16,6 +15,7 @@ import {
 import { useContext } from 'react';
 import { AuthContex } from '../../contextProvider/authContextProvider';
 
+import AppHeader from '../../sharedComponents/Appheader';
 const OtpScreen = () => {
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
@@ -25,13 +25,12 @@ const OtpScreen = () => {
   const [counter, setCounter] = useState(60);
   const [resendClicked, setResendClicked] = useState(false);
   const { setUserId } = useContext(AuthContex);
-  const doctor = location.state?.doctor;
-  console.log(doctor);
   const timerRef = useRef(null);
   if (counter === 0 && startTimer) {
     clearInterval(timerRef.current);
     setStartTimer(false);
   }
+
   useEffect(() => {
     if (startTimer) {
       console.log('test');
@@ -45,14 +44,21 @@ const OtpScreen = () => {
     setLoading(true);
     window.result
       .confirm(otp)
-      .then(async (result) => {
+      .then((result) => {
         setLoading(false);
         console.log('verify result', result);
-        if (!doctor.isVerified) {
-          await markDoctorVerified(doctor.doc_id, result.user.uid);
+        let isNewUser = result?._tokenResponse?.isNewUser;
+        // addDeviceToken(result.user.uid, isNewUser);
+        if (isNewUser) {
+          console.log(isNewUser);
+          history.push('/userInfoForm', {
+            userId: result.user.uid,
+            backScreen: '/login',
+          });
+          setLoading(false);
+        } else {
+          history.push('/');
         }
-
-        history.push('/');
       })
       .catch((err) => {
         console.log(err);
@@ -94,21 +100,16 @@ const OtpScreen = () => {
       ) : (
         <div>
           <div id='recaptcha-container'></div>
-          <div className='arrow_wrapper' onClick={() => history.push('/login')}>
-            <ArrowBackIcon
-              style={{
-                width: '2rem',
-                height: '2rem',
-              }}
-            />
-            <p className='p1'>OTP Code Verification</p>
-          </div>
+          <AppHeader
+            text={'Otp Verification'}
+            onBack={() => history.push('/login')}
+          />
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              marginTop: '20%',
+              marginTop: '35%',
             }}
           >
             {/* <div style={logoImageWrapper}>

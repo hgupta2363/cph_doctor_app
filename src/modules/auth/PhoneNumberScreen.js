@@ -44,7 +44,7 @@ const PhoneNumberScreen = () => {
           },
           auth
         );
-        await setPersistence(auth, browserLocalPersistence);
+             
         const result = await signIn(auth, '+91' + phoneNumber, verify);
         window.result = result;
 
