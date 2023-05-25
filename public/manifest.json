@@ -3,7 +3,8 @@
   "name": "C.P. Hospital Doctor App",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "./logo.png",
+      "sizes": "512x512",
 
       "type": "image/x-icon"
     }
