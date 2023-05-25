@@ -4,7 +4,7 @@ import { setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { checkIsDoctorAvailable } from '../../data/firebaseApi';
 import { useHistory } from 'react-router-dom';
 import Loading from '../../sharedComponents/Loading';
-import logo from '../../assets/logo.PNG';
+
 import loginImage from '../../assets/loginImage.PNG';
 import {
   showErrorMsg,
@@ -44,7 +44,7 @@ const PhoneNumberScreen = () => {
           },
           auth
         );
-             
+
         const result = await signIn(auth, '+91' + phoneNumber, verify);
         window.result = result;
 

@@ -12,9 +12,12 @@ import {
   markAccepted,
 } from '../../data/firebaseApi';
 import { onSnapshot } from 'firebase/firestore';
+import { markCancelled } from '../../data/firebaseApi';
 import { AuthContex } from '../../contextProvider/authContextProvider';
 import Loading from '../../sharedComponents/Loading';
 import { createMeeting } from '../../data/api';
+import AppHeader from '../../sharedComponents/Appheader';
+import CancelReasonModal from './Components/CancelReasonModal';
 
 const AppointmentStatuses = [
   {
@@ -54,7 +57,14 @@ function TabPanel(props) {
     </div>
   );
 }
-const AppointMentList = ({ appointMentStatus, appointmentsList, onAccept }) => {
+const AppointMentList = ({
+  appointMentStatus,
+  appointmentsList,
+  onAccept,
+  onCancel,
+  setShowCancelModal,
+  showCancelModal,
+}) => {
   const filteredAppointments = appointmentsList?.filter(
     (val) => val.status === appointMentStatus
   );
@@ -64,7 +74,13 @@ const AppointMentList = ({ appointMentStatus, appointmentsList, onAccept }) => {
     <div style={{ paddingLeft: '20px', paddingRight: '20px' }}>
       {filteredAppointments.map((appointment) => {
         return (
-          <AppointMentCard appointment={appointment} onAccept={onAccept} />
+          <AppointMentCard
+            appointment={appointment}
+            onAccept={onAccept}
+            onCancel={onCancel}
+            setShowCancelModal={setShowCancelModal}
+            showCancelModal={showCancelModal}
+          />
         );
       })}
     </div>
@@ -75,6 +91,12 @@ const AppointmentListContainer = () => {
   const [appointmentsList, setAppointMentList] = useState([]);
   const [loading, setLoading] = useState(false);
   const { docUserId } = useContext(AuthContex);
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  async function onCancel(id, reason) {
+    await markCancelled(id, reason);
+    setShowCancelModal(false);
+    setSlectedIndex(3);
+  }
 
   const history = useHistory();
 
@@ -105,13 +127,7 @@ const AppointmentListContainer = () => {
   return (
     <div style={{}}>
       <div>
-        <div className='my_appointment_header'>
-          <ArrowBack
-            style={{ height: '20px', width: '20px' }}
-            onClick={() => history.push('/')}
-          />
-          <p className='header_text'>My Appointments</p>
-        </div>
+        <AppHeader />
         <>
           {loading ? (
             <Loading loadingText={'loading Appointments'} />
@@ -151,6 +167,9 @@ const AppointmentListContainer = () => {
                 appointmentsList={appointmentsList}
                 appointMentStatus={AppointmentStatuses[slectedIndex].value}
                 onAccept={onAccept}
+                onCancel={onCancel}
+                showCancelModal={showCancelModal}
+                setShowCancelModal={setShowCancelModal}
               />
             </Box>
           )}

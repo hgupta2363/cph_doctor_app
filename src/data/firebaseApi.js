@@ -141,3 +141,30 @@ export const markDoctorVerified = async (doc_id, doc_user_id) => {
     isVerified: true,
   });
 };
+export const getDoctorDetails = async (doc_user_id) => {
+  console.log(doc_user_id);
+  try {
+    const doctorRef = collection(db, 'cphDoctor');
+    const que = query(
+      doctorRef,
+      where('doc_user_id', '==', doc_user_id),
+      orderBy('depart_id')
+    );
+    const querySnapshot = await getDocs(que);
+    console.log(querySnapshot);
+    const doctorDetails = querySnapshot.docs.map((doc) => doc.data());
+    return doctorDetails &&
+      Array.isArray(doctorDetails) &&
+      doctorDetails.length > 0
+      ? doctorDetails[0]
+      : null;
+  } catch (err) {
+    console.log(err);
+  }
+};
+export const markCancelled = async (id, cancel_reason) => {
+  await updateDoc(doc(db, 'cphAppointments', id), {
+    status: 'CANCELLED',
+    cancel_reason: cancel_reason,
+  });
+};

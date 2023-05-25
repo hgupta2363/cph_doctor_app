@@ -7,9 +7,15 @@
 
 
 }
+.scheduled_date_text{
+    font-size: 12px;
+    color:rgb(102, 101, 101);
+    margin-top: 5px;
+
+}
 .scheduled_heder_text{
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 400;
 
 
 }
@@ -21,7 +27,8 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 10px;
-    gap:10px
+    gap:10px;
+    box-shadow: 1px 1px 30px #fff;
 }
 .name_text{
     font-size: 16px;
@@ -69,8 +76,8 @@
     color: #246bfd;
     font-size: 16px;
     font-weight: 600;
-    width: 150px;
-    height: 45px;
+    width: 120px;
+    height: 40px;
     border: 0px;
     background: white;
     border: 1px solid #246bfd;
@@ -84,7 +91,7 @@
     font-size: 16px;
     font-weight: 600;
     width: 300px;
-    height: 45px;
+    height: 40px;
     border: 0px;
     background: #246bfd;
     border: 1px solid #246bfd;

@@ -1,0 +1,77 @@
+.overlay {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(220, 220, 220);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fade 1s ease forwards;
+    z-index: 1002;
+  }
+  .popup_card {
+    width: 90%;
+    background-color:white;
+  
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    opacity: 1;
+    z-index: 1002;
+    border-radius: 10px;
+    box-shadow: 3px 2px 2px white;
+
+  }
+  .cancel_reasons{
+    padding:20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    margin-left: 5%;
+
+    padding-bottom: 10px;
+
+  }
+  .cancel_reason{
+    border-radius: 10px;
+    background-color: rgb(221, 220, 220);
+    height:40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color:rgb(100, 101, 103)
+  
+  }
+  .content{
+    padding-top: 20px;
+    width: 100%;
+    margin-top: 30px;
+  }
+  .que_text{
+    font-size: 18px;
+    font-weight: 600;
+
+
+  }
+  .cancel_button {
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    width:120px;
+    height: 40px;
+    border: 0px;
+    background:  #246bfd;
+    border: 1px solid #246bfd;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 15px;
+  }

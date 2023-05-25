@@ -1,15 +1,10 @@
 .scheduled_heder_text{
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
 
 
 }
-.scheduled_date_text{
-    font-size: 14px;
-    font-weight: 400;
 
-
-}
 .book_appointment_button {
     color: white;
     font-size: 18px;

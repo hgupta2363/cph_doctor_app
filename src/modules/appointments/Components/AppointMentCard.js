@@ -7,8 +7,16 @@ import { markDone } from '../../../data/firebaseApi';
 import DuoIcon from '@mui/icons-material/Duo';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import ImageSelectorModal from '../../../sharedComponents/ImageSelectorModal';
-const AppointMentCard = ({ appointment, onAccept }) => {
+import CancelReasonModal from './CancelReasonModal';
+const AppointMentCard = ({
+  appointment,
+  onAccept,
+  onCancel,
+  setShowCancelModal,
+  showCancelModal,
+}) => {
   const [showImageSelectorModal, setShowImageSelectorModal] = useState(false);
+
   const [isExpended, setIsexpended] = useState(false);
 
   const history = useHistory();
@@ -38,12 +46,6 @@ const AppointMentCard = ({ appointment, onAccept }) => {
           className='appointment_header'
           onClick={() => setIsexpended((prev) => !prev)}
         >
-          <p className='header_text'>
-            {' '}
-            {appointment?.status === 'REQUESTED'
-              ? 'Appointment Request'
-              : 'Appointment'}
-          </p>
           <p className='name_text'>{`Patient Name: ${appointment?.patient_info?.name}`}</p>
           <div
             style={{
@@ -80,9 +82,8 @@ const AppointMentCard = ({ appointment, onAccept }) => {
                     flexDirection: 'column',
                     alignItems: 'flex-start',
 
-                    padding: '5px 5px 20px 20px',
+                    padding: '5px 5px 5px 30px',
                     borderRadius: '5px',
-                    borderBottom: ' 1px solid rgb(234, 231, 231)',
                   }}
                 >
                   <p className='scheduled_heder_text'>Patient Information</p>
@@ -91,6 +92,7 @@ const AppointMentCard = ({ appointment, onAccept }) => {
                       display: 'flex',
                       flexDirection: 'row',
                       gap: '40px',
+                      marginTop: '10px',
                     }}
                   >
                     <div
@@ -106,6 +108,9 @@ const AppointMentCard = ({ appointment, onAccept }) => {
                       <p className='scheduled_date_text'>Gender</p>
                       <p className='scheduled_date_text'>Mobile Number</p>
                       <p className='scheduled_date_text'>Health Issue</p>
+                      {appointment?.status === 'CANCELLED' && (
+                        <p className='scheduled_date_text'>Cancel Reason</p>
+                      )}
                     </div>
                     <div
                       style={{
@@ -119,6 +124,11 @@ const AppointMentCard = ({ appointment, onAccept }) => {
                       <p className='scheduled_date_text'>{`    ${appointment?.patient_info?.gender}`}</p>
                       <p className='scheduled_date_text'>{`    ${appointment?.patient_info?.phoneNo}`}</p>
                       <p className='scheduled_date_text'>{`   ${appointment?.patient_info?.healthIssueText}`}</p>
+                      {appointment?.status === 'CANCELLED' && (
+                        <p className='scheduled_date_text'>
+                          {appointment?.cancel_reason}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -173,12 +183,17 @@ const AppointMentCard = ({ appointment, onAccept }) => {
               <div
                 style={{
                   display: 'flex',
-                  gap: '70px',
-                  padding: '10px 20px 10px 20px',
+                  gap: '30px',
+                  padding: '0px 20px 20px 20px',
                 }}
               >
-                <div style={{ paddingBottom: '5px', margin: '0px' }}>
-                  <button className='cancel_button_'>Reject</button>
+                <div style={{}}>
+                  <button
+                    className='cancel_button_'
+                    onClick={() => setShowCancelModal(true)}
+                  >
+                    Reject
+                  </button>
                 </div>
 
                 <button
@@ -190,7 +205,7 @@ const AppointMentCard = ({ appointment, onAccept }) => {
               </div>
             )}
             {appointment?.status === 'ACCEPTED' && (
-              <div style={{ paddingBottom: '20px' }}>
+              <div style={{}}>
                 <button
                   className='upload_prescribtion'
                   onClick={() => setShowImageSelectorModal(true)}
@@ -207,6 +222,12 @@ const AppointMentCard = ({ appointment, onAccept }) => {
           onComplete={omMarkAppointmentDone}
           onCompleteCtaText={'Complete Appointment'}
           onClose={() => setShowImageSelectorModal(false)}
+        />
+      )}
+      {showCancelModal && (
+        <CancelReasonModal
+          onCancel={onCancel}
+          id={appointment?.appointment_id}
         />
       )}
     </>
