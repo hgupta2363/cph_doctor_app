@@ -112,3 +112,8 @@
     cursor: pointer;
   margin-top: 15px;
   }
+  .call_text{
+    font-size: 11px;
+    color:rgb(102, 101, 101);
+    margin-top: 5px;
+  }

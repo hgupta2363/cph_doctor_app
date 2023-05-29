@@ -86,13 +86,52 @@ const AppointMentCard = ({
                     borderRadius: '5px',
                   }}
                 >
-                  <p className='scheduled_heder_text'>Patient Information</p>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-around',
+                      alignItems: 'flex-end',
+                      gap: '40px',
+                    }}
+                  >
+                    <p className='scheduled_heder_text'>Patient Information</p>
+                    {appointment?.status === 'ACCEPTED' && (
+                      <>
+                        <div>
+                          <DuoIcon
+                            style={{
+                              color: '#246bfd',
+                              height: '25px',
+                              width: '25px',
+                            }}
+                            onClick={() =>
+                              history.push('/videoCall', {
+                                meetingId: appointment?.meetingId,
+                              })
+                            }
+                          />
+                        </div>
+                        <div>
+                          <LocalPhoneIcon
+                            style={{
+                              color: '#246bfd',
+                              height: '25px',
+                              width: '25px',
+                            }}
+                            onClick={() => {
+                              window.location = 'tel:8118853410';
+                            }}
+                          />
+                        </div>
+                      </>
+                    )}
+                  </div>
                   <div
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
-                      gap: '40px',
-                      marginTop: '10px',
+                      gap: '30px',
+                      marginTop: '2 0px',
                     }}
                   >
                     <div
@@ -100,7 +139,6 @@ const AppointMentCard = ({
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'flex-start',
-                        paddingLeft: '10px',
                       }}
                     >
                       <p className='scheduled_date_text'>Name</p>
@@ -132,50 +170,7 @@ const AppointMentCard = ({
                     </div>
                   </div>
                 </div>
-                <>
-                  {appointment?.status === 'ACCEPTED' && (
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '100%',
-                        margin: 'auto',
-                        gap: '80px',
-                        marginTop: '5px',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <div>
-                        <DuoIcon
-                          style={{
-                            color: '#246bfd',
-                            height: '50px',
-                            width: '50px',
-                          }}
-                          onClick={() =>
-                            history.push('/videoCall', {
-                              meetingId: appointment?.meetingId,
-                            })
-                          }
-                        />
-                        <p>Video Call</p>
-                      </div>
-                      <div>
-                        <LocalPhoneIcon
-                          style={{
-                            color: '#246bfd',
-                            height: '50px',
-                            width: '50px',
-                          }}
-                          onClick={() => {
-                            window.location = 'tel:8118853410';
-                          }}
-                        />
-                        <p>Phone Call</p>
-                      </div>
-                    </div>
-                  )}
-                </>
+                <></>
               </div>
             </div>
 
@@ -205,7 +200,7 @@ const AppointMentCard = ({
               </div>
             )}
             {appointment?.status === 'ACCEPTED' && (
-              <div style={{}}>
+              <div style={{ paddingBottom: '20px' }}>
                 <button
                   className='upload_prescribtion'
                   onClick={() => setShowImageSelectorModal(true)}
