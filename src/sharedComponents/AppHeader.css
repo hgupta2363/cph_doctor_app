@@ -12,6 +12,7 @@
     font-weight: 600;
     margin-left: 14px;
    
+   
     
 }
 ._header_text2{
@@ -27,4 +28,11 @@
   object-fit:fill;
     display: flex;
     justify-content: center;
+}
+.logout{
+    padding-right: 15px;
+    padding-top: 25px;
+}
+.logout_text{
+    color:#246bfd
 }

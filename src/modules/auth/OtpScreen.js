@@ -95,10 +95,15 @@ const OtpScreen = () => {
       ) : (
         <div>
           <div id='recaptcha-container'></div>
-          <AppHeader
-            text={'Otp Verification'}
-            onBack={() => history.push('/login')}
-          />
+          <div className='arrow_wrapper' onClick={() => history.push('/login')}>
+            <ArrowBackIcon
+              style={{
+                width: '2rem',
+                height: '2rem',
+              }}
+            />
+            <p className='p1'>OTP Code Verification</p>
+          </div>
           <div
             style={{
               display: 'flex',

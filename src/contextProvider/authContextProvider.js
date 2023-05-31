@@ -13,6 +13,9 @@ const AuthContextProvider = ({ children }) => {
   const [user, loading] = useAuthState(auth);
   const [fetchProfileLoading, setFetchProfileLoading] = useState(false);
   const [docProfileData, setDocProfileData] = useState();
+  const clearUserData = () => {
+    setDocProfileData({});
+  };
   useEffect(() => {
     (async () => {
       if (user) {
@@ -36,6 +39,7 @@ const AuthContextProvider = ({ children }) => {
 
             docUserId: user?.uid,
             docProfileData: docProfileData,
+            clearUserData: clearUserData,
           }}
         >
           {children}
