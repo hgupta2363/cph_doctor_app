@@ -14,7 +14,7 @@ import {
 } from '../../contextProvider/toastMessegeProvider';
 import { useContext } from 'react';
 import { AuthContex } from '../../contextProvider/authContextProvider';
-
+import { markDoctorVerified } from '../../data/firebaseApi';
 import AppHeader from '../../sharedComponents/Appheader';
 const OtpScreen = () => {
   const [otp, setOtp] = useState('');
@@ -30,7 +30,8 @@ const OtpScreen = () => {
     clearInterval(timerRef.current);
     setStartTimer(false);
   }
-
+  const doctor = location.state?.doctor;
+  console.log(doctor);
   useEffect(() => {
     if (startTimer) {
       console.log('test');
@@ -44,21 +45,15 @@ const OtpScreen = () => {
     setLoading(true);
     window.result
       .confirm(otp)
-      .then((result) => {
+      .then(async (result) => {
         setLoading(false);
+
         console.log('verify result', result);
-        let isNewUser = result?._tokenResponse?.isNewUser;
-        // addDeviceToken(result.user.uid, isNewUser);
-        if (isNewUser) {
-          console.log(isNewUser);
-          history.push('/userInfoForm', {
-            userId: result.user.uid,
-            backScreen: '/login',
-          });
-          setLoading(false);
-        } else {
-          history.push('/');
+        if (!doctor.isVerified) {
+          await markDoctorVerified(doctor.doc_id, result.user.uid);
         }
+
+        history.push('/');
       })
       .catch((err) => {
         console.log(err);

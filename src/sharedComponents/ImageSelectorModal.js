@@ -6,7 +6,7 @@ import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import Progress from 'react-progressbar';
 import DoneIcon from '@mui/icons-material/Done';
 import { storage } from '../data/firebaseInit';
-
+import Loading from './Loading';
 export default function ImageSelectorModal({
   onComplete,
   onCompleteCtaText,
@@ -27,12 +27,12 @@ export default function ImageSelectorModal({
     }
     const storageRef = ref(storage, `files/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
-
+    setImageUploading(true);
     uploadTask.on(
       'state_changed',
       (snapshot) => {
         const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          (snapshot.bytesTransferred * 100) / snapshot.totalBytes
         );
         setProgresspercent(progress);
       },
@@ -54,9 +54,6 @@ export default function ImageSelectorModal({
     setProgresspercent(0);
   };
   useEffect(() => {
-    if (progresspercent > 0) {
-      setImageUploading(true);
-    }
     if (progresspercent === 100) {
       setImageUploading(false);
       setImageUploaded(true);
@@ -84,7 +81,7 @@ export default function ImageSelectorModal({
       };
     });
   };
-
+  console.log(imageUploading);
   return (
     <div className='overlay'>
       <div className='popup_card'>
@@ -121,15 +118,15 @@ export default function ImageSelectorModal({
               <div
                 style={{
                   position: 'relative',
-                  bottom: '103px',
-                  left: '93px',
+                  bottom: '95px',
+                  left: '60px',
                   backgroundColor: 'gray',
                   color: 'white',
                   borderRadius: '50%',
                 }}
                 onClick={resetData}
               >
-                <CloseIcon style={{ width: '20px', height: '20px' }} />
+                <CloseIcon style={{ width: '15px', height: '15px' }} />
               </div>
               {progresspercent === 100 ? (
                 <>
@@ -156,9 +153,11 @@ export default function ImageSelectorModal({
                   <Progress completed={progresspercent} />
                 </>
               ) : (
-                <button className='upload_button_' onClick={uploadImage}>
-                  upload
-                </button>
+                <>
+                  <button className='upload_button_' onClick={uploadImage}>
+                    {imageUploading ? '...Uploading' : 'upload'}
+                  </button>
+                </>
               )}
             </>
           )}
